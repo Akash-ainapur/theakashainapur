@@ -1,0 +1,11 @@
+# Design & Large Binary Files
+*.psd
+Akash_Website_PRD_v2_1.pdf
+ChatGPT Image*.png
+
+# Temporary & Environment files
+.DS_Store
+Thumbs.db
+node_modules/
+.vercel/
+.gemini/

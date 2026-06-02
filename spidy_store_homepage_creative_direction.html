@@ -1,0 +1,214 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+  .wrap { font-family: 'Inter', sans-serif; color: var(--color-text-primary); }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 8px; }
+  .screen { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; margin-bottom: 2rem; }
+  .screen-bar { background: var(--color-background-secondary); padding: 8px 14px; display: flex; align-items: center; gap: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .url-bar { flex: 1; background: var(--color-background-tertiary); border-radius: 4px; height: 22px; display: flex; align-items: center; padding: 0 10px; font-size: 11px; color: var(--color-text-tertiary); }
+
+  .hero { background: #080814; min-height: 380px; position: relative; overflow: hidden; display: flex; flex-direction: column; }
+  .hero-noise { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 70% 50%, #1a0a2e 0%, transparent 70%); pointer-events: none; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 40px 40px; pointer-events: none; }
+
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 32px; position: relative; z-index: 10; }
+  .nav-logo { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+  .nav-cta { background: #fff; color: #080814; font-size: 12px; font-weight: 700; padding: 7px 16px; border-radius: 6px; border: none; cursor: pointer; }
+
+  .hero-content { display: flex; align-items: center; flex: 1; padding: 0 32px 32px; position: relative; z-index: 10; gap: 0; }
+  .hero-text { flex: 1; }
+
+  .tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 4px 12px; font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 16px; }
+  .tag-dot { width: 6px; height: 6px; border-radius: 50%; background: #CC3333; }
+
+  .hero-big { font-size: 52px; font-weight: 900; line-height: 0.92; color: #fff; letter-spacing: -0.04em; margin: 0 0 4px; }
+  .hero-big-accent { color: #CC3333; }
+  .hero-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin: 14px 0 24px; max-width: 240px; line-height: 1.5; }
+
+  .btns { display: flex; gap: 10px; }
+  .btn-primary { background: #CC3333; color: #fff; font-size: 12px; font-weight: 700; padding: 10px 20px; border-radius: 7px; border: none; cursor: pointer; }
+  .btn-secondary { background: transparent; color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 500; padding: 10px 20px; border-radius: 7px; border: 0.5px solid rgba(255,255,255,0.2); cursor: pointer; }
+
+  .hero-figure { position: relative; width: 280px; flex-shrink: 0; display: flex; align-items: flex-end; justify-content: center; }
+  .falling-box { width: 240px; height: 220px; background: rgba(255,255,255,0.04); border: 0.5px dashed rgba(255,255,255,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .falling-label { position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); font-size: 10px; color: rgba(255,255,255,0.3); white-space: nowrap; }
+  .stat-float { position: absolute; top: 10px; right: -10px; background: rgba(255,255,255,0.07); border: 0.5px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 8px 12px; text-align: center; }
+  .stat-num { font-size: 18px; font-weight: 900; color: #fff; }
+  .stat-lbl { font-size: 9px; color: rgba(255,255,255,0.4); }
+  .bg-text { position: absolute; bottom: 20px; left: 0; right: 0; text-align: center; font-size: 80px; font-weight: 900; color: rgba(255,255,255,0.03); letter-spacing: -0.05em; pointer-events: none; }
+
+  .products { background: #0D0D1A; padding: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .prod-card { background: #13132A; border: 0.5px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; }
+  .prod-img { height: 100px; background: #1A1A35; display: flex; align-items: center; justify-content: center; font-size: 11px; color: rgba(255,255,255,0.2); border-bottom: 0.5px solid rgba(255,255,255,0.06); }
+  .prod-body { padding: 14px; }
+  .prod-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .prod-name { font-size: 14px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .prod-desc { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; margin-bottom: 12px; }
+  .prod-row { display: flex; align-items: center; justify-content: space-between; }
+  .prod-price { font-size: 16px; font-weight: 900; color: #fff; }
+  .prod-btn { font-size: 11px; font-weight: 700; padding: 7px 14px; border-radius: 6px; border: none; cursor: pointer; }
+  .free-btn { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); }
+  .paid-btn { background: #CC3333; color: #fff; }
+
+  .annotation { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 16px 20px; margin-bottom: 12px; }
+  .ann-title { font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+  .ann-body { font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+  .ann-badge { display: inline-block; background: var(--color-background-tertiary); border-radius: 4px; padding: 2px 8px; font-size: 10px; font-weight: 500; color: var(--color-text-secondary); margin-right: 6px; margin-bottom: 4px; }
+
+  .img-usage { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 2rem; }
+  .img-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+  .img-thumb { height: 80px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center; font-size: 24px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .img-info { padding: 10px 12px; }
+  .img-name { font-size: 11px; font-weight: 500; margin-bottom: 3px; }
+  .img-use { font-size: 10px; color: var(--color-text-secondary); line-height: 1.5; }
+
+  .color-row { display: flex; gap: 8px; margin: 12px 0; }
+  .swatch { width: 36px; height: 36px; border-radius: 6px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; }
+  .swatch span { font-size: 8px; color: rgba(255,255,255,0.7); font-weight: 500; }
+  .type-row { display: flex; flex-direction: column; gap: 6px; background: var(--color-background-secondary); padding: 14px; border-radius: 8px; }
+</style>
+
+<div class="wrap">
+
+  <p class="section-label">Creative direction — homepage mockup</p>
+
+  <div class="screen">
+    <div class="screen-bar">
+      <div class="dot" style="background:#ff5f57"></div>
+      <div class="dot" style="background:#febc2e"></div>
+      <div class="dot" style="background:#28c840"></div>
+      <div class="url-bar">akash.store</div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-noise"></div>
+      <div class="hero-grid"></div>
+      <div class="bg-text">EDIT</div>
+
+      <div class="nav">
+        <div class="nav-logo">AKASH ✦</div>
+        <button class="nav-cta">Buy Pack ₹249</button>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="tag"><div class="tag-dot"></div> 2,000,000 views and counting</div>
+          <div class="hero-big">THE<br>ASSETS<br><span class="hero-big-accent">BEHIND</span><br>THE REEL</div>
+          <div class="hero-sub">Web VFX · Raven AI clips · SFX · Prompt guide. Works on CapCut mobile.</div>
+          <div class="btns">
+            <button class="btn-primary">Buy Pack — ₹249</button>
+            <button class="btn-secondary">Get free clip</button>
+          </div>
+        </div>
+
+        <div class="hero-figure">
+          <div class="falling-box">
+            <div style="font-size:11px; color:rgba(255,255,255,0.2); text-align:center; line-height:1.6;">
+              ↑ FALLING IMAGE<br>
+              <span style="font-size:9px; opacity:0.5">your cutout goes here<br>full size, center-right</span>
+            </div>
+            <div class="stat-float">
+              <div class="stat-num">2M</div>
+              <div class="stat-lbl">views</div>
+            </div>
+          </div>
+          <div class="falling-label">remove white bg before using</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="products">
+      <div class="prod-card">
+        <div class="prod-img">thumbnail here</div>
+        <div class="prod-body">
+          <div class="prod-tag" style="color:#888">FREE</div>
+          <div class="prod-name">Web Camera Hit Clip</div>
+          <div class="prod-desc">The impact clip from the reel. Drop straight into CapCut.</div>
+          <div class="prod-row">
+            <div class="prod-price">₹0</div>
+            <button class="prod-btn free-btn">Get Free</button>
+          </div>
+        </div>
+      </div>
+      <div class="prod-card" style="border-color: rgba(204,51,51,0.4)">
+        <div class="prod-img" style="background:#1f1020;">thumbnail here</div>
+        <div class="prod-body">
+          <div class="prod-tag" style="color:#CC3333">FULL PACK</div>
+          <div class="prod-name">Spidy Edit Pack</div>
+          <div class="prod-desc">VFX clips · Raven AI · 11 SFX · Prompt guide. Everything.</div>
+          <div class="prod-row">
+            <div class="prod-price">₹249</div>
+            <button class="prod-btn paid-btn">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label">Image placement guide</p>
+
+  <div class="img-usage">
+    <div class="img-card">
+      <div class="img-thumb">🪂</div>
+      <div class="img-info">
+        <div class="img-name">Falling photo</div>
+        <div class="img-use">Hero section, right side. Remove white background first (use remove.bg). Float it over the dark background. Overlap the big headline text.</div>
+      </div>
+    </div>
+    <div class="img-card">
+      <div class="img-thumb">🏠</div>
+      <div class="img-info">
+        <div class="img-name">Room / bedroom</div>
+        <div class="img-use">Background of a "about the creator" strip. Heavy dark overlay (70% black). Purple LED glow fits the brand perfectly.</div>
+      </div>
+    </div>
+    <div class="img-card">
+      <div class="img-thumb">🧑‍💼</div>
+      <div class="img-info">
+        <div class="img-name">Professional portrait</div>
+        <div class="img-use">Small creator bio section below the products. Circle crop. "Made by Akash" with 2-line description and Instagram handle.</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label">Colour palette</p>
+  <div class="color-row">
+    <div class="swatch" style="background:#080814; border:0.5px solid rgba(255,255,255,0.1)"><span>#080814</span></div>
+    <div class="swatch" style="background:#0D0D1A"><span>#0D0D1A</span></div>
+    <div class="swatch" style="background:#13132A"><span>#13132A</span></div>
+    <div class="swatch" style="background:#CC3333"><span>#CC3333</span></div>
+    <div class="swatch" style="background:#ffffff; border:0.5px solid #eee"><span style="color:#333">#FFFFFF</span></div>
+    <div class="swatch" style="background:rgba(255,255,255,0.4); border:0.5px solid #eee"><span style="color:#333">40%wht</span></div>
+  </div>
+  <div style="font-size:11px; color:var(--color-text-secondary); margin-top:4px;">Dark navy base · red accent from your flannel shirt · pure white for headlines</div>
+
+  <p class="section-label" style="margin-top:20px">Typography direction</p>
+  <div class="type-row">
+    <div style="font-size:13px; font-weight:500;">Headline — Inter Black 900, -0.04em tracking, tight leading 0.92</div>
+    <div style="font-size:12px; color:var(--color-text-secondary);">Product names — Inter Bold 700, normal tracking</div>
+    <div style="font-size:11px; color:var(--color-text-tertiary);">Body / descriptions — Inter Regular 400, 1.5 line height</div>
+    <div style="font-size:10px; color:var(--color-text-tertiary);">Labels / tags — Inter Medium 500, 0.1em letter spacing, uppercase</div>
+  </div>
+
+  <div style="margin-top:16px">
+  <p class="section-label">Key design notes for your designer</p>
+  <div class="annotation">
+    <div class="ann-title">The falling image is the whole concept</div>
+    <div class="ann-body">It reads as "in freefall but relaxed" — that's the brand vibe. Someone who's comfortable in chaos. Place it large on the right of the hero, overlapping the headline. The arms-out pose naturally frames the text on the left. Remove the white background first at remove.bg</div>
+  </div>
+  <div class="annotation">
+    <div class="ann-title">The red in the flannel = brand accent</div>
+    <div class="ann-body">The red from the shirt (#CC3333 approx) becomes the CTA colour and accent throughout. This ties the person to the brand visually — the shirt colour IS the button colour. Everything clicks.</div>
+  </div>
+  <div class="annotation">
+    <div class="ann-title">Dark navy, not pure black</div>
+    <div class="ann-body">Pure black looks harsh. The #080814 dark navy has a slight blue tint — it matches the purple LED energy from the bedroom photo and makes the page feel more like a creative space than a generic dark site.</div>
+  </div>
+  <div class="annotation">
+    <div class="ann-title">The "2M" social proof floats over the figure</div>
+    <div class="ann-body">Small floating card near the falling image showing "2M views" — builds instant credibility. Position it top-right of the figure so it reads while the eye is still on the image.</div>
+  </div>
+  </div>
+
+</div>
