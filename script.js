@@ -75,48 +75,57 @@ function triggerDownloadToast() {
   }, 1200);
 }
 
-// Close modal on overlay click
+// Close modals on overlay click
 document.addEventListener('DOMContentLoaded', () => {
-  const modalOverlay = document.getElementById('emailModal');
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) {
+  const emailModal = document.getElementById('emailModal');
+  if (emailModal) {
+    emailModal.addEventListener('click', (e) => {
+      if (e.target === emailModal) {
         closeModal();
+      }
+    });
+  }
+
+  const paidWarningModal = document.getElementById('paidWarningModal');
+  if (paidWarningModal) {
+    paidWarningModal.addEventListener('click', (e) => {
+      if (e.target === paidWarningModal) {
+        closeWarningModal();
       }
     });
   }
 });
 
-// Close modal on Escape key
+// Close modals on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeModal();
+    closeWarningModal();
   }
 });
 
-// ——— Buy Now — Cashfree Integration Placeholder ———
+// ——— Paid Warning Modal Functions ———
 function handleBuyNow() {
-  showToast('🔄', 'Initializing payment...');
+  const modal = document.getElementById('paidWarningModal');
+  if (!modal) return;
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
 
-  // TODO: Replace with actual Cashfree Drop JS integration
-  // Step 1: Call backend to create order
-  //   const response = await fetch('/api/create-order', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ amount: 249, currency: 'INR' })
-  //   });
-  //   const { order_token } = await response.json();
-  //
-  // Step 2: Open Cashfree checkout
-  //   const cashfree = new Cashfree(order_token);
-  //   cashfree.redirect();
-  //
-  // Step 3: Handle webhook on backend for payment confirmation
-  //   Backend verifies signature → reveals download link → sends email
+function closeWarningModal() {
+  const modal = document.getElementById('paidWarningModal');
+  if (!modal) return;
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+function proceedToCheckout() {
+  closeWarningModal();
+  showToast('🔄', 'Opening secure payment gateway...');
 
   setTimeout(() => {
-    showToast('ℹ️', 'Payment gateway coming soon — stay tuned!');
-  }, 1500);
+    window.open('https://payments.cashfree.com/forms?code=testingakashainapur', '_blank');
+  }, 800);
 }
 
 // ——— Toast Notifications ———
