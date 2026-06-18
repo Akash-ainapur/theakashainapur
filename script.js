@@ -53,16 +53,7 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// Auto-open Spidy Pack Modal after 3.5 seconds
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    // Only auto-open if the modal isn't already active (e.g. user clicked it manually)
-    const modal = document.getElementById('emailModal');
-    if (modal && !modal.classList.contains('active')) {
-      openModal();
-    }
-  }, 3500); // 3.5 seconds delay is smooth and lets the hero load first
-});
+
 
 // Toast notification and auto-close on download click
 function triggerDownloadToast() {
