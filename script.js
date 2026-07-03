@@ -87,13 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Close modals on Escape key
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeModal();
-    closeWarningModal();
-  }
-});
+
 
 // ——— Paid Warning Modal Functions ———
 function handleBuyNow() {
@@ -201,3 +195,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, { passive: true });
 });
+
+// ——— Lightbox ———
+function openLightbox(src, caption, sub) {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  const captionEl = document.getElementById('lightboxCaption');
+  const subEl = document.getElementById('lightboxSub');
+  if (!lightbox || !img) return;
+
+  img.src = src;
+  img.alt = caption || '';
+  captionEl.textContent = caption || '';
+  subEl.textContent = sub || '';
+
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  // If called from an onclick on the overlay itself, only close if clicking the backdrop
+  if (e && e.target !== document.getElementById('lightbox') && e.target !== document.getElementById('lightboxCloseBtn')) {
+    // Allow click through on the inner content — only close when backdrop is clicked
+    if (e.currentTarget === document.getElementById('lightbox') && e.target !== e.currentTarget) return;
+  }
+  const lightbox = document.getElementById('lightbox');
+  if (!lightbox) return;
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+  // Clear src after transition to avoid flash on next open
+  setTimeout(() => {
+    const img = document.getElementById('lightboxImg');
+    if (img && !lightbox.classList.contains('active')) img.src = '';
+  }, 400);
+}
+
+// Close lightbox on Escape key (added to existing keydown listener)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeWarningModal();
+    closeLightbox();
+  }
+});
+
